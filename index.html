@@ -101,6 +101,38 @@
       cursor: pointer;
     }
 
+    /* Checkout Section */
+    .checkout {
+      background: #1c1c1c;
+      color: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: 30px auto;
+      border-radius: 10px;
+      text-align: left;
+    }
+    .checkout h2 { text-align: center; margin-bottom: 15px; }
+    .checkout label { display: block; margin: 10px 0; font-size: 0.95rem; }
+    .checkout input, .checkout select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border-radius: 5px;
+      border: none;
+    }
+    .checkout button {
+      width: 100%;
+      padding: 10px;
+      background: gold;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      color: #111;
+      font-size: 1rem;
+    }
+
     /* Footer */
     footer {
       margin-top: 40px;
@@ -154,7 +186,7 @@
 </head>
 <body>
 
-<!-- Animated Glitch Header -->
+<!-- Glitch Header -->
 <h1 id="animated-head" class="glitch" data-text="Online Store">Online Store</h1>
 
 <!-- Products Section -->
@@ -181,6 +213,36 @@
   </div>
 </div>
 
+<!-- Checkout Section -->
+<div class="checkout">
+  <h2>Checkout 🛒</h2>
+  <form id="checkoutForm">
+    <label>
+      Name:
+      <input type="text" id="name" placeholder="Your name" required>
+    </label>
+    <label>
+      Email:
+      <input type="email" id="email" placeholder="Your email" required>
+    </label>
+    <label>
+      Select Product:
+      <select id="productSelect" required>
+        <option value="Sport Shoes">Sport Shoes - $50</option>
+        <option value="Headphones">Headphones - $30</option>
+        <option value="T-Shirt">T-Shirt - $20</option>
+      </select>
+    </label>
+    <label>
+      Quantity:
+      <input type="number" id="quantity" value="1" min="1">
+    </label>
+    <p>Total: $<span id="total">50</span></p>
+    <button type="submit">Pay Now</button>
+  </form>
+  <p id="checkoutMessage" style="color: gold; font-weight:bold;"></p>
+</div>
+
 <!-- Footer -->
 <footer>
   Powered by <strong>Victonnel 👑</strong>
@@ -197,23 +259,18 @@
 <script>
 /* Chat Bot */
 const messages = document.getElementById("messages");
-
 function sendMessage() {
   const input = document.getElementById("userInput");
   const text = input.value.trim();
   if (!text) return;
-
   addMessage("You: " + text);
-
   let response = "Sorry, I don't understand.";
   if (text.toLowerCase().includes("hello")) response = "Hi there! Welcome to Victonnel Store! 👑";
   if (text.toLowerCase().includes("products")) response = "We have shoes, t-shirts, and headphones!";
   if (text.toLowerCase().includes("price")) response = "Prices start at $20. Check our product cards!";
-
   addMessage("Bot: " + response);
   input.value = "";
 }
-
 function addMessage(msg) {
   const div = document.createElement("div");
   div.textContent = msg;
@@ -221,7 +278,33 @@ function addMessage(msg) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-/* Animated Glitch Header Text Swap */
+/* Checkout JS */
+const productSelect = document.getElementById("productSelect");
+const quantityInput = document.getElementById("quantity");
+const totalDisplay = document.getElementById("total");
+const productPrices = {"Sport Shoes":50,"Headphones":30,"T-Shirt":20};
+function updateTotal() {
+  const product = productSelect.value;
+  const quantity = parseInt(quantityInput.value) || 1;
+  totalDisplay.textContent = productPrices[product]*quantity;
+}
+productSelect.addEventListener("change", updateTotal);
+quantityInput.addEventListener("input", updateTotal);
+const checkoutForm = document.getElementById("checkoutForm");
+const checkoutMessage = document.getElementById("checkoutMessage");
+checkoutForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const product = productSelect.value;
+  const quantity = quantityInput.value;
+  const total = totalDisplay.textContent;
+  checkoutMessage.textContent = `Thank you ${name}! Your order of ${quantity} ${product}(s) for $${total} has been received. 👑`;
+  checkoutForm.reset();
+  updateTotal();
+});
+
+/* Glitch Header Text Swap */
 const header = document.getElementById("animated-head");
 const texts = ["Online Store", "Victonnel Store"];
 let index = 0;

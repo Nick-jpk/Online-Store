@@ -2,124 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+
   <style>
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
       background: #111;
       color: #fff;
-      margin: 0;
-      padding: 0;
+      text-align: center;
     }
 
-    header {
-      background: #000;
-      color: gold;
-      text-align: center;
+    h1 { font-size: 1.4rem; margin: 20px 0; }
+
+    p { font-size: 1rem; }
+
+    .footer {
+      margin-top: 40px;
       padding: 15px;
-      font-size: 22px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #222;
     }
 
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      background: #1c1c1c;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      align-items: center;
-    }
-
-    .item span {
-      font-size: 16px;
-    }
-
-    .remove {
-      background: red;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .total {
-      font-size: 20px;
-      color: gold;
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    a, button.checkout {
-      display: block;
-      margin: 15px auto;
-      text-align: center;
-      padding: 10px;
-      background: gold;
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      width: 80%;
-    }
+    .footer strong { color: gold; }
   </style>
 </head>
 <body>
 
-<header>
-  🛍️ Your Cart
-</header>
+<h1>🛒 Your Cart</h1>
+<p>Your cart is currently empty.</p>
 
-<div class="container" id="cartItems"></div>
-
-<div class="total" id="totalPrice"></div>
-
-<a href="checkout.html">Proceed to Checkout</a>
-<a href="index.html">← Back to Store</a>
-
-<script>
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let cartItems = document.getElementById("cartItems");
-  let totalPrice = document.getElementById("totalPrice");
-
-  function displayCart() {
-    cartItems.innerHTML = "";
-    let total = 0;
-
-    if (cart.length === 0) {
-      cartItems.innerHTML = "<p>Your cart is empty.</p>";
-      totalPrice.innerHTML = "";
-      return;
-    }
-
-    cart.forEach((item, index) => {
-      total += item.price;
-
-      cartItems.innerHTML += `
-        <div class="item">
-          <span>${item.name} - $${item.price}</span>
-          <button class="remove" onclick="removeItem(${index})">X</button>
-        </div>
-      `;
-    });
-
-    totalPrice.innerHTML = "Total: $" + total;
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-  }
-
-  displayCart();
-</script>
+<footer class="footer">
+  Powered by <strong>Victonnel 👑</strong>
+</footer>
 
 </body>
 </html>

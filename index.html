@@ -1,82 +1,73 @@
-<div id="chat">
-  <div id="messages"></div>
-  <input type="text" id="userInput" placeholder="Type a message..." />
-  <button onclick="sendMessage()">Send</button>
-  <div class="chat-footer">Powered by <strong>Victonnel 👑</strong></div>
-</div>
-
-<script>
-const messages = document.getElementById("messages");
-
-function sendMessage() {
-  const input = document.getElementById("userInput");
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage("You: " + text);
-
-  // Simple responses
-  let response = "Sorry, I don't understand.";
-  if (text.toLowerCase().includes("hello")) response = "Hi there! Welcome to Victonnel Store! 👑";
-  if (text.toLowerCase().includes("products")) response = "We have shoes, t-shirts, and headphones!";
-  if (text.toLowerCase().includes("price")) response = "Prices start at $20. Check our product cards!";
-
-  addMessage("Bot: " + response);
-  input.value = "";
-}
-
-function addMessage(msg) {
-  const div = document.createElement("div");
-  div.textContent = msg;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-}
-</script>
+<h1 id="animated-head" class="glitch" data-text="Online Store">Online Store</h1>
 
 <style>
-#chat {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 250px;
-  background: #1c1c1c;
-  color: white;
-  border-radius: 10px;
-  padding: 10px;
-  font-family: Arial, sans-serif;
-}
-
-#messages {
-  max-height: 150px;
-  overflow-y: auto;
-  margin-bottom: 5px;
-}
-
-#userInput {
-  width: 70%;
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-}
-
-button {
-  padding: 5px 8px;
-  border: none;
-  border-radius: 5px;
-  background: gold;
+/* Basic font styling */
+#animated-head {
+  font-size: 2rem;
   font-weight: bold;
-  cursor: pointer;
-}
-
-/* Footer inside chat */
-.chat-footer {
-  margin-top: 8px;
-  font-size: 0.8rem;
-  color: #aaa;
-  text-align: center;
-}
-
-.chat-footer strong {
   color: gold;
+  position: relative;
+  display: inline-block;
+  margin: 20px 0;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+/* Glitch effect */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  clip: rect(0, 9999px, 0, 0);
+}
+
+.glitch::before {
+  animation: glitchTop 2s infinite linear;
+  color: #ff3;
+  z-index: 1;
+}
+
+.glitch::after {
+  animation: glitchBottom 2s infinite linear;
+  color: #fff;
+  z-index: 1;
+}
+
+/* Glitch keyframes */
+@keyframes glitchTop {
+  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+  10% { clip: rect(2px, 9999px, 12px, 0); transform: translate(-2px, -2px); }
+  20% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, 2px); }
+  30% { clip: rect(0px, 9999px, 6px, 0); transform: translate(-1px, 1px); }
+  40% { clip: rect(3px, 9999px, 12px, 0); transform: translate(1px, -1px); }
+  50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+  100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+  10% { clip: rect(6px, 9999px, 10px, 0); transform: translate(1px, 1px); }
+  20% { clip: rect(2px, 9999px, 14px, 0); transform: translate(-2px, -1px); }
+  30% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, -2px); }
+  40% { clip: rect(1px, 9999px, 12px, 0); transform: translate(-1px, 2px); }
+  50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+  100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
 }
 </style>
+
+<script>
+// Swap the text between Online Store and Victonnel Store every 3 seconds
+const header = document.getElementById("animated-head");
+const texts = ["Online Store", "Victonnel Store"];
+let index = 0;
+
+setInterval(() => {
+  index = (index + 1) % texts.length;
+  header.setAttribute("data-text", texts[index]);
+  header.textContent = texts[index];
+}, 3000);
+</script>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #000;
+      color: gold;
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,215,0,0.2);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: gold;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .success {
+      text-align: center;
+      color: gold;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: gold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  💳 Checkout
+</header>
+
+<div class="container" id="checkoutBox">
+
+  <form onsubmit="placeOrder(event)">
+    <input type="text" placeholder="Full Name" required>
+    <input type="email" placeholder="Email Address" required>
+    <textarea placeholder="Delivery Address" required></textarea>
+    <button type="submit">Place Order</button>
+  </form>
+
+</div>
+
+<script>
+  function placeOrder(event) {
+    event.preventDefault();
+
+    // clear cart
+    localStorage.removeItem("cart");
+
+    document.getElementById("checkoutBox").innerHTML = `
+      <div class="success">
+        ✅ Order placed successfully! <br><br>
+        <small>(This is a demo checkout)</small>
+      </div>
+      <a href="index.html">Back to Store</a>
+    `;
+  }
+</script>
+
+</body>
+</html>

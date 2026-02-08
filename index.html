@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Online Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #000;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      color: gold;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      background: #1c1c1c;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255,215,0,0.2);
+    }
+
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      margin: 10px 0;
+    }
+
+    .price {
+      color: gold;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: gold;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #ffcc00;
+    }
+
+    .cart-link {
+      display: block;
+      text-align: center;
+      margin: 20px;
+      color: gold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  🛒 Demo Online Store
+</header>
+
+<a class="cart-link" href="cart.html">View Cart</a>
+
+<div class="container">
+
+  <div class="product">
+    <img src="images/shoe.jpg" alt="Shoe">
+    <h3>Sport Shoes</h3>
+    <p class="price">$50</p>
+    <button onclick="addToCart('Sport Shoes', 50)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="images/headphones.jpg" alt="Headphones">
+    <h3>Headphones</h3>
+    <p class="price">$30</p>
+    <button onclick="addToCart('Headphones', 30)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="images/tshirt.jpg" alt="T-Shirt">
+    <h3>T-Shirt</h3>
+    <p class="price">$20</p>
+    <button onclick="addToCart('T-Shirt', 20)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name, price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(name + " added to cart!");
+  }
+</script>
+
+</body>
+</html>

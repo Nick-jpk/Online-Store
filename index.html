@@ -1,73 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victonnel Store</title>
+
+  <style>
+    /* Chrome-like font settings */
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+
+    /* Glitching header */
+    #animated-head {
+      font-size: 2rem;
+      font-weight: bold;
+      color: gold;
+      position: relative;
+      display: inline-block;
+      margin: 20px 0;
+      text-transform: uppercase;
+      cursor: default;
+    }
+    #animated-head.glitch::before,
+    #animated-head.glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 9999px, 0, 0);
+    }
+    #animated-head.glitch::before {
+      animation: glitchTop 2s infinite linear;
+      color: #ff3;
+      z-index: 1;
+    }
+    #animated-head.glitch::after {
+      animation: glitchBottom 2s infinite linear;
+      color: #fff;
+      z-index: 1;
+    }
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+      10% { clip: rect(2px, 9999px, 12px, 0); transform: translate(-2px, -2px); }
+      20% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, 2px); }
+      30% { clip: rect(0px, 9999px, 6px, 0); transform: translate(-1px, 1px); }
+      40% { clip: rect(3px, 9999px, 12px, 0); transform: translate(1px, -1px); }
+      50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    }
+    @keyframes glitchBottom {
+      0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+      10% { clip: rect(6px, 9999px, 10px, 0); transform: translate(1px, 1px); }
+      20% { clip: rect(2px, 9999px, 14px, 0); transform: translate(-2px, -1px); }
+      30% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, -2px); }
+      40% { clip: rect(1px, 9999px, 12px, 0); transform: translate(-1px, 2px); }
+      50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    }
+
+    /* Products */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .card {
+      background: #1c1c1c;
+      width: 180px;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card h3 { font-size: 1.1rem; margin: 10px 0 5px; }
+    .card p { font-size: 1rem; color: gold; }
+    .card button {
+      font-size: 0.95rem;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: gold;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #222;
+    }
+    footer strong { color: gold; }
+
+    /* Chat widget */
+    #chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 250px;
+      background: #1c1c1c;
+      color: white;
+      border-radius: 10px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      z-index: 1000;
+    }
+    #messages {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-bottom: 5px;
+    }
+    #userInput {
+      width: 70%;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    #chat button {
+      padding: 5px 8px;
+      border: none;
+      border-radius: 5px;
+      background: gold;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .chat-footer {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #aaa;
+      text-align: center;
+    }
+    .chat-footer strong { color: gold; }
+  </style>
+</head>
+<body>
+
+<!-- Animated Glitch Header -->
 <h1 id="animated-head" class="glitch" data-text="Online Store">Online Store</h1>
 
-<style>
-/* Basic font styling */
-#animated-head {
-  font-size: 2rem;
-  font-weight: bold;
-  color: gold;
-  position: relative;
-  display: inline-block;
-  margin: 20px 0;
-  text-transform: uppercase;
-  cursor: default;
-}
+<!-- Products Section -->
+<div class="products">
+  <div class="card">
+    <img src="images/shoe.jpg" alt="Sport Shoes">
+    <h3>Sport Shoes</h3>
+    <p>$50</p>
+    <button>Add to Cart</button>
+  </div>
 
-/* Glitch effect */
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-  clip: rect(0, 9999px, 0, 0);
-}
+  <div class="card">
+    <img src="images/headphones.jpg" alt="Headphones">
+    <h3>Headphones</h3>
+    <p>$30</p>
+    <button>Add to Cart</button>
+  </div>
 
-.glitch::before {
-  animation: glitchTop 2s infinite linear;
-  color: #ff3;
-  z-index: 1;
-}
+  <div class="card">
+    <img src="images/tshirt.jpg" alt="T-Shirt">
+    <h3>T-Shirt</h3>
+    <p>$20</p>
+    <button>Add to Cart</button>
+  </div>
+</div>
 
-.glitch::after {
-  animation: glitchBottom 2s infinite linear;
-  color: #fff;
-  z-index: 1;
-}
+<!-- Footer -->
+<footer>
+  Powered by <strong>Victonnel 👑</strong>
+</footer>
 
-/* Glitch keyframes */
-@keyframes glitchTop {
-  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-  10% { clip: rect(2px, 9999px, 12px, 0); transform: translate(-2px, -2px); }
-  20% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, 2px); }
-  30% { clip: rect(0px, 9999px, 6px, 0); transform: translate(-1px, 1px); }
-  40% { clip: rect(3px, 9999px, 12px, 0); transform: translate(1px, -1px); }
-  50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-  100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-}
-
-@keyframes glitchBottom {
-  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-  10% { clip: rect(6px, 9999px, 10px, 0); transform: translate(1px, 1px); }
-  20% { clip: rect(2px, 9999px, 14px, 0); transform: translate(-2px, -1px); }
-  30% { clip: rect(4px, 9999px, 8px, 0); transform: translate(2px, -2px); }
-  40% { clip: rect(1px, 9999px, 12px, 0); transform: translate(-1px, 2px); }
-  50% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-  100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
-}
-</style>
+<!-- Chat widget -->
+<div id="chat">
+  <div id="messages"></div>
+  <input type="text" id="userInput" placeholder="Type a message..." />
+  <button onclick="sendMessage()">Send</button>
+  <div class="chat-footer">Powered by <strong>Victonnel 👑</strong></div>
+</div>
 
 <script>
-// Swap the text between Online Store and Victonnel Store every 3 seconds
+/* Chat Bot */
+const messages = document.getElementById("messages");
+
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage("You: " + text);
+
+  let response = "Sorry, I don't understand.";
+  if (text.toLowerCase().includes("hello")) response = "Hi there! Welcome to Victonnel Store! 👑";
+  if (text.toLowerCase().includes("products")) response = "We have shoes, t-shirts, and headphones!";
+  if (text.toLowerCase().includes("price")) response = "Prices start at $20. Check our product cards!";
+
+  addMessage("Bot: " + response);
+  input.value = "";
+}
+
+function addMessage(msg) {
+  const div = document.createElement("div");
+  div.textContent = msg;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+/* Animated Glitch Header Text Swap */
 const header = document.getElementById("animated-head");
 const texts = ["Online Store", "Victonnel Store"];
 let index = 0;
-
 setInterval(() => {
   index = (index + 1) % texts.length;
   header.setAttribute("data-text", texts[index]);
   header.textContent = texts[index];
 }, 3000);
 </script>
+
+</body>
+</html>

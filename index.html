@@ -3,183 +3,714 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victonnel Store</title>
-
+  <title>Victonnel Store ✨</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
-    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
-    body {
+    :root {
+      --gold: #FFD700;
+      --gold-glow: rgba(255, 215, 0, 0.6);
+      --dark-bg: #0a0a0a;
+      --card-bg: #1a1a1a;
+      --accent: #ff6b6b;
+      --text-light: #f0f0f0;
+      --text-dim: #aaa;
+    }
+    
+    * {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1rem;
-      line-height: 1.5;
-      background: #111;
-      color: #fff;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Glitch header */
-    #animated-head {
-      font-size: 2rem;
-      font-weight: bold;
-      color: gold;
-      position: relative;
-      display: inline-block;
-      margin: 20px 0;
-      text-transform: uppercase;
-      text-shadow: 0 0 5px gold, 0 0 10px gold, 0 0 20px gold, 0 0 40px orange;
-      animation: flicker 1.5s infinite alternate;
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
     }
-    #animated-head.glitch::before,
-    #animated-head.glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      left: 0;
+    
+    /* Floating particles background */
+    .particles {
+      position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      overflow: hidden;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
     }
-    @keyframes flicker {
-      0%,100%{opacity:1;}
-      50%{opacity:0.6;}
+    
+    .particle {
+      position: absolute;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 15s infinite linear;
     }
-
-    /* Products */
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-1000px) rotate(720deg); }
     }
-    .card {
-      background: #1c1c1c;
-      width: 180px;
-      border-radius: 10px;
-      padding: 10px;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px gold;
-    }
-    .card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .card p { color: gold; }
-
-    /* Checkout */
-    .checkout {
-      background: #1c1c1c;
-      max-width: 400px;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: left;
-    }
-    .checkout button {
-      width: 100%;
-      padding: 10px;
-      background: gold;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 40px;
-      padding: 15px;
-      color: #aaa;
-      border-top: 1px solid #222;
-    }
-    footer strong { color: gold; }
-
-    /* 🎵 Music Button */
-    #music-btn {
+    
+    /* Music Player */
+    .music-player {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: gold;
-      color: #111;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px gold;
-      z-index: 3000;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(26, 26, 26, 0.9);
+      padding: 10px 15px;
+      border-radius: 30px;
+      border: 1px solid var(--gold);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px var(--gold-glow);
     }
-    #music-btn:hover {
-      background: orange;
+    
+    .music-btn {
+      background: var(--gold);
+      color: var(--dark-bg);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .music-btn:hover {
+      background: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--gold);
+    }
+    
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 30px 20px 20px;
+      position: relative;
+    }
+    
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 10px;
+      text-shadow: 
+        0 0 10px var(--gold-glow),
+        0 0 20px var(--gold-glow),
+        0 0 30px rgba(255, 215, 0, 0.3);
+      position: relative;
+      display: inline-block;
+      animation: glitch 3s infinite;
+    }
+    
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      5% { transform: translate(-2px, 2px); }
+      10% { transform: translate(2px, -2px); }
+      15% { transform: translate(-2px, -2px); }
+      20% { transform: translate(2px, 2px); }
+      25% { transform: translate(0); }
+    }
+    
+    .tagline {
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    
+    .currency-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--gold), #ffaa00);
+      color: var(--dark-bg);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    
+    /* Products Section */
+    .products-section {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--gold);
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      bottom: -10px;
+      left: 20%;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+    
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      position: relative;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.15);
+      border-color: var(--gold);
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      z-index: 1;
+    }
+    
+    .product-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .product-card:hover .product-img img {
+      transform: scale(1.1);
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-title {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: var(--text-light);
+    }
+    
+    .product-price {
+      color: var(--gold);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .currency {
+      font-size: 1rem;
+      color: var(--text-dim);
+    }
+    
+    .add-to-cart {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, var(--gold), #ffaa00);
+      color: var(--dark-bg);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .add-to-cart:hover {
+      background: linear-gradient(45deg, #ffaa00, var(--gold));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+    
+    .add-to-cart:active {
+      transform: translateY(0);
+    }
+    
+    /* Cart Section */
+    .cart-section {
+      background: rgba(26, 26, 26, 0.8);
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      color: var(--gold);
+    }
+    
+    .cart-count {
+      background: var(--gold);
+      color: var(--dark-bg);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    
+    .cart-items {
+      margin-bottom: 25px;
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .cart-total {
+      text-align: right;
+      font-size: 1.8rem;
+      margin: 20px 0;
+      color: var(--gold);
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(45deg, var(--accent), #ff8e8e);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+    }
+    
+    .checkout-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      color: var(--text-dim);
+    }
+    
+    .powered-by {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    
+    .victonnel-logo {
+      color: var(--gold);
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      margin-left: 5px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo { font-size: 2.5rem; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+      .cart-section { margin: 30px 20px; }
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--gold);
+      color: var(--dark-bg);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.5s;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .notification.show {
+      transform: translateY(0);
+      opacity: 1;
     }
   </style>
 </head>
 
 <body>
-
-<!-- 🎵 Background Music -->
-<audio id="bg-music" autoplay loop muted>
-  <source src="music/love_story_indila.mp3" type="audio/mpeg">
-</audio>
-<button id="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
-
-<!-- Header -->
-<h1 id="animated-head" class="glitch" data-text="Victonnel Store">Victonnel Store</h1>
-
-<!-- Products -->
-<div class="products">
-  <div class="card">
-    <img src="images/shoe.jpg">
-    <h3>Sport Shoes</h3>
-    <p>KES/= 2,500</p>
-    <button>Add to Cart</button>
+  <!-- Background particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Music Player -->
+  <div class="music-player">
+    <button class="music-btn" id="music-toggle">
+      <i class="fas fa-play"></i>
+    </button>
+    <span style="font-size: 0.9rem;">Background Music</span>
   </div>
-  <div class="card">
-    <img src="images/headphones.jpg">
-    <h3>Headphones</h3>
-    <p>KES/= 1,500</p>
-    <button>Add to Cart</button>
-  </div>
-  <div class="card">
-    <img src="images/tshirt.jpg">
-    <h3>T-Shirt</h3>
-    <p>KES/= 1,000</p>
-    <button>Add to Cart</button>
-  </div>
-</div>
+  
+  <!-- Audio Element -->
+  <audio id="bg-music" loop>
+    <!-- You can add your music file here -->
+    <!-- <source src="music/love_story_indila.mp3" type="audio/mpeg"> -->
+    <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+  </audio>
+  
+  <!-- Header -->
+  <header class="header">
+    <h1 class="logo">VICTONNEL STORE</h1>
+    <p class="tagline">Premium Products with Golden Touch ✨</p>
+    <div class="currency-badge">
+      <i class="fas fa-coins"></i> All prices in KES
+    </div>
+  </header>
+  
+  <!-- Products Section -->
+  <section class="products-section">
+    <h2 class="section-title">Featured Products</h2>
+    
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sport Shoes">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Sport Shoes</h3>
+          <div class="product-price">
+            <span class="currency">KES</span> 2,500
+          </div>
+          <button class="add-to-cart" data-name="Sport Shoes" data-price="2500">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Headphones">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Premium Headphones</h3>
+          <div class="product-price">
+            <span class="currency">KES</span> 1,500
+          </div>
+          <button class="add-to-cart" data-name="Premium Headphones" data-price="1500">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+      
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="T-Shirt">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Designer T-Shirt</h3>
+          <div class="product-price">
+            <span class="currency">KES</span> 1,000
+          </div>
+          <button class="add-to-cart" data-name="Designer T-Shirt" data-price="1000">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Cart & Checkout -->
+  <section class="cart-section">
+    <div class="cart-header">
+      <h2><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h2>
+      <div class="cart-count" id="cart-count">0</div>
+    </div>
+    
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items will appear here -->
+      <p style="text-align: center; color: var(--text-dim);" id="empty-cart">Your cart is empty. Add some products!</p>
+    </div>
+    
+    <div class="cart-total">
+      Total: <span id="cart-total">KES 0</span>
+    </div>
+    
+    <button class="checkout-btn" id="checkout-btn">
+      <i class="fas fa-lock"></i> Proceed to Checkout
+    </button>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 Victonnel Store. All rights reserved.</p>
+    <p class="powered-by">Powered by <span class="victonnel-logo">VICTONNEL 👑</span></p>
+    <p style="margin-top: 10px; font-size: 0.9rem;">
+      <i class="fas fa-shipping-fast"></i> Free Shipping on orders over KES 5,000
+    </p>
+  </footer>
+  
+  <!-- Notification -->
+  <div class="notification" id="notification"></div>
 
-<!-- Checkout -->
-<div class="checkout">
-  <h2>Checkout 🛒</h2>
-  <p>Total: KES/= <span id="total">2500</span></p>
-  <button>Pay Now</button>
-</div>
-
-<!-- Footer -->
-<footer>
-  Powered by <strong>Victonnel 👑</strong>
-</footer>
-
-<script>
-  /* 🎵 Music control */
-  const music = document.getElementById("bg-music");
-  const btn = document.getElementById("music-btn");
-
-  function toggleMusic() {
-    if (music.muted) {
-      music.muted = false;
-      music.play();
-      btn.textContent = "🔊 Music On";
-    } else {
-      music.muted = true;
-      btn.textContent = "🔇 Music Off";
+  <script>
+    // Initialize cart
+    let cart = [];
+    let total = 0;
+    
+    // Background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random size and position
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random animation
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // Random opacity
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+      }
     }
-  }
-</script>
-
+    
+    // Music player
+    const music = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = musicToggle.querySelector('i');
+    
+    musicToggle.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        musicIcon.classList.remove('fa-play');
+        musicIcon.classList.add('fa-pause');
+      } else {
+        music.pause();
+        musicIcon.classList.remove('fa-pause');
+        musicIcon.classList.add('fa-play');
+      }
+    });
+    
+    // Cart functionality
+    function addToCart(name, price) {
+      // Check if item already in cart
+      const existingItem = cart.find(item => item.name === name);
+      
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
+      
+      // Update cart display
+      updateCart();
+      
+      // Show notification
+      showNotification(`${name} added to cart!`);
+    }
+    
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+      showNotification('Item removed from cart');
+    }
+    
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      const emptyCart = document.getElementById('empty-cart');
+      
+      // Update total
+      total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      // Update count
+      const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = itemCount;
+      
+      // Update total display
+      cartTotal.textContent = `KES ${total.toLocaleString()}`;
+      
+      // Clear current items
+      cartItems.innerHTML = '';
+      
+      if (cart.length === 0) {
+        emptyCart.style.display = 'block';
+        return;
+      }
+      
+      emptyCart.style.display = 'none';
+      
+      // Add items to cart display
+      cart.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        
+        itemElement.innerHTML = `
+          <div>
+            <strong>${item.name}</strong>
+            <div style="font-size: 0.9rem; color: var(--text-dim);">
+              KES ${item.price} × ${item.quantity}
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <strong>KES ${(item.price * item.quantity).toLocaleString()}</strong>
+            <button class="remove-btn" data-index="${index}" style="background: none; border: none; color: var(--accent); cursor: pointer;">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+        
+        cartItems.appendChild(itemElement);
+      });
+      
+      // Add event listeners to remove buttons
+      document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'));
+          removeFromCart(index);
+        });
+      });
+    }
+    
+    // Notification system
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Checkout button
+    document.getElementById('checkout-btn').addEventListener('click', function() {
+      if (cart.length === 0) {
+        showNotification('Your cart is empty!');
+        return;
+      }
+      
+      showNotification(`Order placed! Total: KES ${total.toLocaleString()}`);
+      
+      // Reset cart
+      cart = [];
+      updateCart();
+    });
+    
+    // Add to cart buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', function() {
+        const name = this.getAttribute('data-name');
+        const price = parseInt(this.getAttribute('data-price'));
+        addToCart(name, price);
+        
+        // Button animation
+        this.innerHTML = '<i class="fas fa-check"></i> Added!';
+        this.style.background = 'linear-gradient(45deg, #4CAF50, #8BC34A)';
+        
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+          this.style.background = 'linear-gradient(45deg, var(--gold), #ffaa00)';
+        }, 1000);
+      });
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      updateCart();
+      
+      // Try to play music (autoplay policies may block this)
+      setTimeout(() => {
+        if (music.paused) {
+          music.play().then(() => {
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+          }).catch(() => {
+            // Autoplay blocked
+            console.log("Autoplay blocked by browser");
+          });
+        }
+      }, 1000);
+    });
+  </script>
 </body>
-</html>
+            </html>

@@ -1,425 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victonnel Store ✨</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --gold: #FFD700;
-      --gold-glow: rgba(255, 215, 0, 0.6);
-      --dark-bg: #0a0a0a;
-      --card-bg: #1a1a1a;
-      --accent: #ff6b6b;
-      --text-light: #f0f0f0;
-      --text-dim: #aaa;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--dark-bg);
-      color: var(--text-light);
-      min-height: 100vh;
-      overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
-    }
-    
-    /* Floating particles background */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    
-    .particle {
-      position: absolute;
-      background: var(--gold);
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: float 15s infinite linear;
-    }
-    
-    @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-1000px) rotate(720deg); }
-    }
-    
-    /* Music Player */
-    .music-player {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(26, 26, 26, 0.9);
-      padding: 10px 15px;
-      border-radius: 30px;
-      border: 1px solid var(--gold);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px var(--gold-glow);
-    }
-    
-    .music-btn {
-      background: var(--gold);
-      color: var(--dark-bg);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .music-btn:hover {
-      background: white;
-      transform: scale(1.1);
-      box-shadow: 0 0 20px var(--gold);
-    }
-    
-    /* Header */
-    .header {
-      text-align: center;
-      padding: 30px 20px 20px;
-      position: relative;
-    }
-    
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 10px;
-      text-shadow: 
-        0 0 10px var(--gold-glow),
-        0 0 20px var(--gold-glow),
-        0 0 30px rgba(255, 215, 0, 0.3);
-      position: relative;
-      display: inline-block;
-      animation: glitch 3s infinite;
-    }
-    
-    @keyframes glitch {
-      0%, 100% { transform: translate(0); }
-      5% { transform: translate(-2px, 2px); }
-      10% { transform: translate(2px, -2px); }
-      15% { transform: translate(-2px, -2px); }
-      20% { transform: translate(2px, 2px); }
-      25% { transform: translate(0); }
-    }
-    
-    .tagline {
-      color: var(--text-dim);
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      font-weight: 300;
-    }
-    
-    .currency-badge {
-      display: inline-block;
-      background: linear-gradient(45deg, var(--gold), #ffaa00);
-      color: var(--dark-bg);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: 600;
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-    
-    /* Products Section */
-    .products-section {
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: var(--gold);
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    .section-title::after {
-      content: '';
-      position: absolute;
-      width: 60%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      bottom: -10px;
-      left: 20%;
-    }
-    
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
-    }
-    
-    .product-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      position: relative;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.15);
-      border-color: var(--gold);
-    }
-    
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--accent));
-      z-index: 1;
-    }
-    
-    .product-img {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-    
-    .product-card:hover .product-img img {
-      transform: scale(1.1);
-    }
-    
-    .product-info {
-      padding: 20px;
-    }
-    
-    .product-title {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-      color: var(--text-light);
-    }
-    
-    .product-price {
-      color: var(--gold);
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .currency {
-      font-size: 1rem;
-      color: var(--text-dim);
-    }
-    
-    .add-to-cart {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(45deg, var(--gold), #ffaa00);
-      color: var(--dark-bg);
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    
-    .add-to-cart:hover {
-      background: linear-gradient(45deg, #ffaa00, var(--gold));
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-    }
-    
-    .add-to-cart:active {
-      transform: translateY(0);
-    }
-    
-    /* Cart Section */
-    .cart-section {
-      background: rgba(26, 26, 26, 0.8);
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 25px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      backdrop-filter: blur(10px);
-    }
-    
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      color: var(--gold);
-    }
-    
-    .cart-count {
-      background: var(--gold);
-      color: var(--dark-bg);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-    }
-    
-    .cart-items {
-      margin-bottom: 25px;
-    }
-    
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .cart-total {
-      text-align: right;
-      font-size: 1.8rem;
-      margin: 20px 0;
-      color: var(--gold);
-    }
-    
-    .checkout-btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(45deg, var(--accent), #ff8e8e);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      letter-spacing: 1px;
-    }
-    
-    .checkout-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
-    }
-    
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 40px;
-      border-top: 1px solid rgba(255, 215, 0, 0.2);
-      color: var(--text-dim);
-    }
-    
-    .powered-by {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-    
-    .victonnel-logo {
-      color: var(--gold);
-      font-weight: 700;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
-      margin-left: 5px;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .logo { font-size: 2.5rem; }
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-      .cart-section { margin: 30px 20px; }
-    }
-    
-    /* Notification */
-    .notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--gold);
-      color: var(--dark-bg);
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-weight: 600;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.5s;
-      z-index: 1000;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .notification.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Store - Premium Products with Background Music</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-  <!-- Background particles -->
-  <div class="particles" id="particles"></div>
-  
-  <!-- Music Player -->
-  <div class="music-player">
-    <button class="music-btn" id="music-toggle">
-      <i class="fas fa-play"></i>
-    </button>
-    <span style="font-size: 0.9rem;">Background Music</span>
-  </div>
-  
-  <!-- Audio Element -->
-  <audio id="bg-music" loop>
-    <!-- You can add your music file here -->
-    <!-- <source src="music/love_story_indila.mp3" type="audio/mpeg"> -->
-    <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
-  </audio>
-  
-  <!-- Header -->
-  <header class="header">
-    <h1 class="logo">VICTONNEL STORE</h1>
+    <!-- Background Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-controls">
+            <button id="playPauseBtn" class="control-btn">
+                <i class="fas fa-play"></i>
+            </button>
+            <button id="muteBtn" class="control-btn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="volume-slider-container">
+                <i class="fas fa-volume-down volume-icon"></i>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.3">
+                <i class="fas fa-volume-up volume-icon"></i>
+            </div>
+            <div class="now-playing">
+                <span id="songTitle">Background Music</span>
+                <div class="music-visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Website Content -->
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1><i class="fas fa-store"></i> line-store-navy-alpha</h1>
+                <p class="subtitle">Premium Products with Ambiance</p>
+            </div>
+            <div class="music-indicator" id="musicIndicator">
+                <i class="fas fa-music"></i>
+                <span>Music: ON</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Premium Products</h2>
+                    <p class="tagline">Elevate your experience with our curated collection</p>
+                    <p class="currency">All prices in <strong>KES</strong></p>
+                </div>
+            </section>
+
+            <section class="featured">
+                <h2><i class="fas fa-star"></i> Featured Products</h2>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sport Shoes">
+                            <div class="product-badge">BESTSELLER</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Sport Shoes</h3>
+                            <p class="product-description">Premium quality sports shoes for maximum comfort and performance.</p>
+                            <div class="price-section">
+                                <span class="price">KES 2,500</span>
+                                <span class="old-price">KES 3,500</span>
+                                <span class="discount">-29%</span>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button class="quick-view">
+                                <i class="fas fa-eye"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Wireless Headphones">
+                            <div class="product-badge">NEW</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Wireless Headphones</h3>
+                            <p class="product-description">Noise-cancelling wireless headphones with 30-hour battery.</p>
+                            <div class="price-section">
+                                <span class="price">KES 4,200</span>
+                                <span class="old-price">KES 5,000</span>
+                                <span class="discount">-16%</span>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button class="quick-view">
+                                <i class="fas fa-eye"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Smart Watch">
+                            <div class="product-badge">TRENDING</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Smart Watch</h3>
+                            <p class="product-description">Feature-rich smartwatch with health monitoring.</p>
+                            <div class="price-section">
+                                <span class="price">KES 6,800</span>
+                                <span class="old-price">KES 8,500</span>
+                                <span class="discount">-20%</span>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button class="quick-view">
+                                <i class="fas fa-eye"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="music-info">
+                <div class="info-card">
+                    <i class="fas fa-headphones-alt"></i>
+                    <h3>Background Music</h3>
+                    <p>Enjoy curated background music while you shop. Control volume or mute as needed.</p>
+                    <div class="music-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="currentVolume">30%</span>
+                            <span class="stat-label">Volume</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="playbackStatus">Ready</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>line-store-navy-alpha.vercel.app | Premium Shopping Experience</p>
+            <p class="footer-note">Background music enhances your shopping journey</p>
+        </footer>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="backgroundAudio" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>lass="logo">VICTONNEL STORE</h1>
     <p class="tagline">Premium Products with Golden Touch ✨</p>
     <div class="currency-badge">
       <i class="fas fa-coins"></i> All prices in KES
@@ -714,3 +457,4 @@
   </script>
 </body>
             </html>
+

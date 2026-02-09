@@ -3,151 +3,422 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Store - Premium Products</title>
+    <title>VICTONNEL STORES 👑 - Luxury Shopping Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
         }
         
         body {
-            background: linear-gradient(135deg, #0a192f 0%, #1a237e 100%);
-            color: white;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2a2a6a 100%);
+            color: #e6d4b3;
             min-height: 100vh;
-            padding: 20px;
-            padding-bottom: 100px; /* Space for music player */
+            position: relative;
+            overflow-x: hidden;
         }
         
+        /* Luxury Background Effects */
+        .luxury-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(192, 192, 192, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .diamond {
+            position: absolute;
+            color: rgba(255, 215, 0, 0.2);
+            font-size: 24px;
+            animation: diamondFloat 20s infinite linear;
+        }
+        
+        @keyframes diamondFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
-        /* Header */
-        .header {
+        /* Royal Header */
+        .royal-header {
             text-align: center;
-            padding: 40px 20px;
-            background: rgba(26, 35, 126, 0.8);
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border: 1px solid #3949ab;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.1) 0%, 
+                rgba(192, 192, 192, 0.05) 50%, 
+                rgba(25, 25, 112, 0.2) 100%);
+            border-radius: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                inset 0 0 100px rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
         }
         
-        .header h1 {
-            font-size: 2.8em;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #64b5f6, #7986cb);
+        .crown-icon {
+            font-size: 60px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            animation: crownGlow 3s infinite alternate;
+        }
+        
+        @keyframes crownGlow {
+            0% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.3); }
+        }
+        
+        .store-title {
+            font-size: 4.5em;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #c0c0c0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
         
         .tagline {
-            font-size: 1.3em;
-            color: #bbdefb;
-            margin-bottom: 10px;
+            font-size: 1.6em;
+            color: #b8a674;
+            margin-bottom: 20px;
+            font-style: italic;
+            letter-spacing: 1px;
         }
         
-        .currency {
+        .powered-by {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.2), rgba(192, 192, 192, 0.1));
+            color: #d4af37;
+            padding: 12px 35px;
+            border-radius: 50px;
             font-size: 1.1em;
-            color: #64ffda;
-            font-weight: bold;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            margin: 15px 0;
+            letter-spacing: 2px;
         }
         
-        /* Music Player - Fixed at Bottom */
-        .music-player {
-            position: fixed;
+        /* Music Status */
+        .music-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(26, 26, 46, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            border: 1px solid rgba(100, 181, 246, 0.3);
+        }
+        
+        .music-note {
+            color: #64b5f6;
+            font-size: 24px;
+            animation: musicBounce 1s infinite alternate;
+        }
+        
+        @keyframes musicBounce {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        
+        /* Premium Collection Section */
+        .premium-section {
+            background: rgba(10, 10, 30, 0.7);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: #d4af37;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
             bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 35, 126, 0.98);
-            padding: 15px 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+        
+        .collection-description {
+            text-align: center;
+            font-size: 1.2em;
+            color: #b8a674;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: linear-gradient(135deg, 
+                rgba(26, 26, 46, 0.9) 0%, 
+                rgba(30, 30, 60, 0.9) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(212, 175, 55, 0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #ff4081, #f50057);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, #1a1a4a, #2a2a6a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(212, 175, 55, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .product-details {
+            padding: 30px;
+        }
+        
+        .product-name {
+            font-size: 1.8em;
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: #b8a674;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        
+        .price-section {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 1000;
-            border-top: 3px solid #5c6bc0;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
         
-        .music-info {
+        .price {
+            font-size: 2.2em;
+            color: #64ffda;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+        
+        .currency {
+            color: #64b5f6;
+            font-size: 0.9em;
+            margin-left: 5px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #d4af37, #ffd700);
+            color: #1a1a4a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, #ffd700, #fffacd);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Music Player Section */
+        .music-player-section {
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 126, 0.3) 0%, 
+                rgba(30, 136, 229, 0.2) 100%);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(100, 181, 246, 0.3);
+        }
+        
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            background: rgba(10, 10, 30, 0.8);
+            padding: 25px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .song-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            min-width: 300px;
+        }
+        
+        .song-art {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff4081, #3949ab);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+        
+        .song-details h4 {
+            color: #64b5f6;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .song-details p {
+            color: #bbdefb;
+            font-size: 0.9em;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            background: rgba(57, 73, 171, 0.3);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            color: #64b5f6;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: rgba(100, 181, 246, 0.2);
+            transform: scale(1.1);
+            border-color: #64b5f6;
+        }
+        
+        .volume-control {
             display: flex;
             align-items: center;
             gap: 15px;
             min-width: 250px;
         }
         
-        .song-art {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #ff4081, #3949ab);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        
-        .song-details {
-            flex: 1;
-        }
-        
-        .song-title {
-            font-weight: bold;
-            color: white;
-            font-size: 14px;
-        }
-        
-        .song-artist {
-            color: #bbdefb;
-            font-size: 12px;
-        }
-        
-        .music-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            justify-content: center;
-        }
-        
-        .control-btn {
-            background: #3949ab;
-            border: none;
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s;
-        }
-        
-        .control-btn:hover {
-            background: #5c6bc0;
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .volume-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 200px;
-            justify-content: flex-end;
-        }
-        
         .volume-slider {
-            width: 100px;
-            height: 5px;
-            background: #5c6bc0;
+            flex: 1;
+            height: 6px;
+            background: rgba(100, 181, 246, 0.2);
             border-radius: 10px;
             outline: none;
             -webkit-appearance: none;
@@ -155,198 +426,199 @@
         
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            background: white;
+            width: 20px;
+            height: 20px;
+            background: #64b5f6;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid #3949ab;
+            border: 3px solid #0a0a2a;
         }
         
-        .volume-percent {
-            color: #64ffda;
-            font-weight: bold;
-            min-width: 40px;
-        }
-        
-        /* Products */
-        .featured-title {
+        /* Footer */
+        .royal-footer {
             text-align: center;
-            margin: 40px 0 30px;
-            font-size: 2em;
-            color: #64b5f6;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
         }
         
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .product-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(57, 73, 171, 0.3);
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: #5c6bc0;
-        }
-        
-        .product-image {
-            height: 200px;
-            background: linear-gradient(45deg, #1a237e, #3949ab);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .product-details {
-            padding: 25px;
-        }
-        
-        .product-name {
-            font-size: 1.5em;
-            color: #64b5f6;
-            margin-bottom: 10px;
-        }
-        
-        .product-description {
-            color: #bbdefb;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            font-size: 0.95em;
-        }
-        
-        .product-price {
-            font-size: 1.8em;
-            color: #64ffda;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .add-to-cart {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #3949ab, #5c6bc0);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .add-to-cart:hover {
-            background: linear-gradient(45deg, #5c6bc0, #7986cb);
+        .copyright {
+            color: #b8a674;
+            font-size: 1.1em;
             letter-spacing: 1px;
         }
         
-        /* Music Status Banner */
-        .music-banner {
-            background: rgba(30, 136, 229, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            text-align: center;
-            border-left: 5px solid #64b5f6;
+        .copyright-icon {
+            color: #d4af37;
+            margin: 0 10px;
+            animation: copyrightSpin 10s infinite linear;
         }
         
-        .music-banner p {
-            color: #bbdefb;
-            margin: 5px 0;
+        @keyframes copyrightSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        /* Responsive */
-        @media (max-width: 900px) {
-            .music-player {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
+        .year {
+            color: #64ffda;
+            font-weight: bold;
+        }
+        
+        .victonnel-signature {
+            margin-top: 20px;
+            color: #d4af37;
+            font-size: 1.2em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .store-title {
+                font-size: 3.5em;
             }
             
-            .music-info, .volume-controls {
+            .music-player {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .song-info, .volume-control {
                 width: 100%;
                 justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .store-title {
+                font-size: 2.5em;
             }
             
             .products-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2em;
+            
+            .premium-section, .music-player-section {
+                padding: 25px;
             }
             
-            .music-controls {
-                flex-wrap: wrap;
-            }
-            
-            .control-btn {
-                width: 40px;
-                height: 40px;
+            .product-image {
+                height: 200px;
+                font-size: 60px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Luxury Background Effects -->
+    <div class="luxury-bg" id="luxuryBg"></div>
+    
     <div class="container">
-        <!-- Store Header -->
-        <header class="header">
-            <h1>line-store-navy-alpha.vercel.app</h1>
-            <p class="tagline">Premium Products • Background Music</p>
-            <p class="currency">All prices in KES</p>
+        <!-- Royal Header -->
+        <header class="royal-header">
+            <div class="crown-icon">
+                <i class="fas fa-crown"></i>
+            </div>
             
-            <div class="music-banner">
-                <p>🎵 <strong>Now Playing:</strong> Indila - Love Story</p>
-                <p id="musicStatus" style="font-size:0.9em;">Music ready - Click play button below</p>
+            <h1 class="store-title">VICTONNEL STORES</h1>
+            
+            <p class="tagline">Premium Products with Royal Ambiance</p>
+            
+            <div class="powered-by">
+                <i class="fas fa-gem"></i> POWERED BY VICTONNEL <i class="fas fa-crown"></i>
+            </div>
+            
+            <div class="music-status">
+                <div class="music-note">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div>
+                    <div style="color: #64b5f6; font-weight: bold;">Music: <span id="musicStatusText">ON</span></div>
+                    <div style="color: #bbdefb; font-size: 0.9em;" id="songInfo">Afternoon Chill</div>
+                </div>
             </div>
         </header>
 
-        <!-- Featured Products -->
-        <h2 class="featured-title"># Featured Products</h2>
-        
-        <div class="products-grid">
-            <!-- Sport Shoes -->
-            <div class="product-card">
-                <div class="product-image">
-                    👟
-                </div>
-                <div class="product-details">
-                    <h3 class="product-name">Sport Shoes</h3>
-                    <p class="product-description">Premium quality sports shoes for maximum comfort and performance during workouts and daily activities.</p>
-                    <div class="product-price">KES 2,500</div>
-                    <button class="add-to-cart">
-                        <span>🛒</span> Add to Cart
-                    </button>
-                </div>
-            </div>
+        <!-- Premium Collection -->
+        <section class="premium-section">
+            <h2 class="section-title">Premium Collection</h2>
             
-            <!-- Wireless Headphones -->
-            <div class="product-card">
-                <div class="product-image">
-                    🎧
+            <p class="collection-description">
+                Elevate your experience with our curated collection of luxury products. 
+                Each item is selected for its exceptional quality and timeless elegance.
+            </p>
+            
+            <p style="text-align: center; color: #d4af37; margin-bottom: 40px; font-size: 1.3em;">
+                <i class="fas fa-gem"></i> All prices in <strong>KES</strong> <i class="fas fa-gem"></i>
+            </p>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge">BESTSELLER</div>
+                    <div class="product-image">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Wireless Headphones</h3>
+                        <p class="product-description">
+                            Premium noise-cancelling wireless headphones with 30-hour battery life 
+                            and crystal-clear sound quality for the ultimate audio experience.
+                        </p>
+                        <div class="price-section">
+                            <div>
+                                <span class="price">4,200</span>
+                                <span class="currency">KES</span>
+                            </div>
+                            <div style="color: #4CAF50; font-weight: bold;">
+                                <i class="fas fa-bolt"></i> In Stock
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                        </button>
+                    </div>
                 </div>
-                <div class="product-details">
-                    <h3 class="product-name">Wireless Headphones</h3>
-                    <p class="product-description">Noise-cancelling wireless headphones with 30-hour battery life and premium sound quality.</p>
-                    <div class="product-price">KES 4,200</div>
-                    <button class="add-to-cart">
-                        <span>🛒</span> Add to Cart
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge">PREMIUM</div>
+                    <div class="product-image">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Sport Shoes</h3>
+                        <p class="product-description">
+                            High-performance sport shoes designed for maximum comfort and 
+                            durability. Perfect for athletes and fitness enthusiasts.
+                        </p>
+                        <div class="price-section">
+                            <div>
+                                <span class="price">2,500</span>
+                                <span class="currency">KES</span>
+                            </div>
+                            <div style="color: #4CAF50; font-weight: bold;">
+                                <i class="fas fa-bolt"></i> In Stock
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-badge">LUXURY</div>
+                    <div class="product-image">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Smart Watch</h3>
+                        <p class="product-description">
+                            Advanced smartwatch with health monitoring, GPS tracking, and 
+                               <span>🛒</span> Add to Cart
                     </button>
                 </div>
             </div>
@@ -776,5 +1048,6 @@
   </script>
 </body>
             </html>
+
 
 

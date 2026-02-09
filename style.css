@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a192f 0%, #1a237e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26, 35, 126, 0.95);
+    border-radius: 12px;
+    padding: 15px;
+    width: 350px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.music-player:hover {
+    transform: translateY(-5px);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-btn {
+    background: #3949ab;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #5c6bc0;
+    transform: scale(1.1);
+}
+
+.volume-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.volume-slider-container input[type="range"] {
+    flex: 1;
+    height: 5px;
+    background: #5c6bc0;
+    border-radius: 10px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.volume-slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-icon {
+    color: #c5cae9;
+    font-size: 14px;
+}
+
+.now-playing {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+#songTitle {
+    font-size: 12px;
+    color: #c5cae9;
+}
+
+.music-visualizer {
+    display: flex;
+    gap: 2px;
+    height: 20px;
+    align-items: flex-end;
+}
+
+.music-visualizer .bar {
+    width: 3px;
+    background: #5c6bc0;
+    border-radius: 2px;
+    animation: musicWave 1s infinite ease-in-out;
+}
+
+.music-visualizer .bar:nth-child(1) { animation-delay: 0.1s; height: 8px; }
+.music-visualizer .bar:nth-child(2) { animation-delay: 0.2s; height: 12px; }
+.music-visualizer .bar:nth-child(3) { animation-delay: 0.3s; height: 16px; }
+.music-visualizer .bar:nth-child(4) { animation-delay: 0.4s; height: 12px; }
+.music-visualizer .bar:nth-child(5) { animation-delay: 0.5s; height: 8px; }
+
+@keyframes musicWave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.5); }
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 40px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    background: linear-gradient(45deg, #64b5f6, #7986cb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: #c5cae9;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.music-indicator {
+    background: rgba(57, 73, 171, 0.3);
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(26, 35, 126, 0.7), rgba(30, 136, 229, 0.7));
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #bbdefb;
+    margin-bottom: 15px;
+}
+
+.currency {
+    font-size: 16px;
+    color: #90caf9;
+}
+
+/* Featured Products */
+.featured {
+    margin-bottom: 50px;
+}
+
+.featured h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.product-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.1);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff4081;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #bbdefb;
+}
+
+.product-description {
+    color: #90caf9;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.price-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #64ffda;
+}
+
+.old-price {
+    font-size: 16px;
+    color: #90caf9;
+    text-decoration: line-through;
+}
+
+.discount {
+    background: #ff4081;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.add-to-cart, .quick-view {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-to-cart {
+    background: linear-gradient(45deg, #3949ab, #5c6bc0);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.add-to-cart:hover {
+    background: linear-gradient(45deg, #5c6bc0, #7986cb);
+}
+
+.quick-view {
+    background: transparent;
+    color: #bbdefb;
+    border: 1px solid #3949ab;
+}
+
+.quick-view:hover {
+    background: rgba(57, 73, 171, 0.2);
+}
+
+/* Music Info Section */
+.music-info {
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background: linear-gradient(135deg, rgba(30, 136, 229, 0.2), rgba(26, 35, 126, 0.4));
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+.info-card i {
+    font-size: 48px;
+    color: #64b5f6;
+    margin-bottom: 20px;
+}
+
+.info-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    color: #bbdefb;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.music-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #64ffda;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #90caf9;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #90caf9;
+    font-size: 14px;
+}
+
+.footer-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #64b5f6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .music-player {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+    }
+    
+    .player-controls {
+        flex-wrap: wrap;
+    }
+    
+    .now-playing {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .hero h2 {
+        font-size: 28px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .music-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

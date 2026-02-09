@@ -3,222 +3,541 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Store - Premium Products with Background Music</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Line Store - Premium Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a192f 0%, #1a237e 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px; /* Space for music player */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(26, 35, 126, 0.8);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 1px solid #3949ab;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #64b5f6, #7986cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            color: #bbdefb;
+            margin-bottom: 10px;
+        }
+        
+        .currency {
+            font-size: 1.1em;
+            color: #64ffda;
+            font-weight: bold;
+        }
+        
+        /* Music Player - Fixed at Bottom */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 35, 126, 0.98);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            border-top: 3px solid #5c6bc0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 250px;
+        }
+        
+        .song-art {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff4081, #3949ab);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .song-details {
+            flex: 1;
+        }
+        
+        .song-title {
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .song-artist {
+            color: #bbdefb;
+            font-size: 12px;
+        }
+        
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            background: #3949ab;
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: #5c6bc0;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .volume-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+            justify-content: flex-end;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            height: 5px;
+            background: #5c6bc0;
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #3949ab;
+        }
+        
+        .volume-percent {
+            color: #64ffda;
+            font-weight: bold;
+            min-width: 40px;
+        }
+        
+        /* Products */
+        .featured-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            font-size: 2em;
+            color: #64b5f6;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(57, 73, 171, 0.3);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #5c6bc0;
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .product-details {
+            padding: 25px;
+        }
+        
+        .product-name {
+            font-size: 1.5em;
+            color: #64b5f6;
+            margin-bottom: 10px;
+        }
+        
+        .product-description {
+            color: #bbdefb;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        
+        .product-price {
+            font-size: 1.8em;
+            color: #64ffda;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #3949ab, #5c6bc0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, #5c6bc0, #7986cb);
+            letter-spacing: 1px;
+        }
+        
+        /* Music Status Banner */
+        .music-banner {
+            background: rgba(30, 136, 229, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            border-left: 5px solid #64b5f6;
+        }
+        
+        .music-banner p {
+            color: #bbdefb;
+            margin: 5px 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .music-player {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .music-info, .volume-controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .music-controls {
+                flex-wrap: wrap;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Music Player -->
-    <div class="music-player" id="musicPlayer">
-        <div class="player-controls">
-            <button id="playPauseBtn" class="control-btn">
-                <i class="fas fa-play"></i>
-            </button>
-            <button id="muteBtn" class="control-btn">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <div class="volume-slider-container">
-                <i class="fas fa-volume-down volume-icon"></i>
-                <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.3">
-                <i class="fas fa-volume-up volume-icon"></i>
-            </div>
-            <div class="now-playing">
-                <span id="songTitle">Background Music</span>
-                <div class="music-visualizer">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Website Content -->
     <div class="container">
-        <header>
-            <div class="logo">
-                <h1><i class="fas fa-store"></i> line-store-navy-alpha</h1>
-                <p class="subtitle">Premium Products with Ambiance</p>
-            </div>
-            <div class="music-indicator" id="musicIndicator">
-                <i class="fas fa-music"></i>
-                <span>Music: ON</span>
+        <!-- Store Header -->
+        <header class="header">
+            <h1>line-store-navy-alpha.vercel.app</h1>
+            <p class="tagline">Premium Products • Background Music</p>
+            <p class="currency">All prices in KES</p>
+            
+            <div class="music-banner">
+                <p>🎵 <strong>Now Playing:</strong> Indila - Love Story</p>
+                <p id="musicStatus" style="font-size:0.9em;">Music ready - Click play button below</p>
             </div>
         </header>
 
-        <main>
-            <section class="hero">
-                <div class="hero-content">
-                    <h2>Premium Products</h2>
-                    <p class="tagline">Elevate your experience with our curated collection</p>
-                    <p class="currency">All prices in <strong>KES</strong></p>
+        <!-- Featured Products -->
+        <h2 class="featured-title"># Featured Products</h2>
+        
+        <div class="products-grid">
+            <!-- Sport Shoes -->
+            <div class="product-card">
+                <div class="product-image">
+                    👟
                 </div>
-            </section>
-
-            <section class="featured">
-                <h2><i class="fas fa-star"></i> Featured Products</h2>
-                
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sport Shoes">
-                            <div class="product-badge">BESTSELLER</div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Sport Shoes</h3>
-                            <p class="product-description">Premium quality sports shoes for maximum comfort and performance.</p>
-                            <div class="price-section">
-                                <span class="price">KES 2,500</span>
-                                <span class="old-price">KES 3,500</span>
-                                <span class="discount">-29%</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                            <button class="quick-view">
-                                <i class="fas fa-eye"></i> Quick View
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Wireless Headphones">
-                            <div class="product-badge">NEW</div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Wireless Headphones</h3>
-                            <p class="product-description">Noise-cancelling wireless headphones with 30-hour battery.</p>
-                            <div class="price-section">
-                                <span class="price">KES 4,200</span>
-                                <span class="old-price">KES 5,000</span>
-                                <span class="discount">-16%</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                            <button class="quick-view">
-                                <i class="fas fa-eye"></i> Quick View
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Smart Watch">
-                            <div class="product-badge">TRENDING</div>
-                        </div>
-                        <div class="product-info">
-                            <h3>Smart Watch</h3>
-                            <p class="product-description">Feature-rich smartwatch with health monitoring.</p>
-                            <div class="price-section">
-                                <span class="price">KES 6,800</span>
-                                <span class="old-price">KES 8,500</span>
-                                <span class="discount">-20%</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                            <button class="quick-view">
-                                <i class="fas fa-eye"></i> Quick View
-                            </button>
-                        </div>
-                    </div>
+                <div class="product-details">
+                    <h3 class="product-name">Sport Shoes</h3>
+                    <p class="product-description">Premium quality sports shoes for maximum comfort and performance during workouts and daily activities.</p>
+                    <div class="product-price">KES 2,500</div>
+                    <button class="add-to-cart">
+                        <span>🛒</span> Add to Cart
+                    </button>
                 </div>
-            </section>
-
-            <section class="music-info">
-                <div class="info-card">
-                    <i class="fas fa-headphones-alt"></i>
-                    <h3>Background Music</h3>
-                    <p>Enjoy curated background music while you shop. Control volume or mute as needed.</p>
-                    <div class="music-stats">
-                        <div class="stat">
-                            <span class="stat-value" id="currentVolume">30%</span>
-                            <span class="stat-label">Volume</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value" id="playbackStatus">Ready</span>
-                            <span class="stat-label">Status</span>
-                        </div>
-                    </div>
+            </div>
+            
+            <!-- Wireless Headphones -->
+            <div class="product-card">
+                <div class="product-image">
+                    🎧
                 </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>line-store-navy-alpha.vercel.app | Premium Shopping Experience</p>
-            <p class="footer-note">Background music enhances your shopping journey</p>
-        </footer>
+                <div class="product-details">
+                    <h3 class="product-name">Wireless Headphones</h3>
+                    <p class="product-description">Noise-cancelling wireless headphones with 30-hour battery life and premium sound quality.</p>
+                    <div class="product-price">KES 4,200</div>
+                    <button class="add-to-cart">
+                        <span>🛒</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Smart Watch -->
+            <div class="product-card">
+                <div class="product-image">
+                    ⌚
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Smart Watch</h3>
+                    <p class="product-description">Feature-rich smartwatch with health monitoring, GPS, and smartphone connectivity.</p>
+                    <div class="product-price">KES 6,800</div>
+                    <button class="add-to-cart">
+                        <span>🛒</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Hidden Audio Element -->
-    <audio id="backgroundAudio" loop>
-        <source src="background-music.mp3" type="audio/mpeg">
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="music-info">
+            <div class="song-art">
+                ♫
+            </div>
+            <div class="song-details">
+                <div class="song-title" id="currentSong">Indila - Love Story</div>
+                <div class="song-artist">Line Store Background Music</div>
+            </div>
+        </div>
+        
+        <div class="music-controls">
+            <button id="prevBtn" class="control-btn" title="Previous">
+                ⏮
+            </button>
+            <button id="playBtn" class="control-btn" title="Play" style="background:#ff4081; width:50px; height:50px;">
+                ▶
+            </button>
+            <button id="pauseBtn" class="control-btn" title="Pause">
+                ⏸
+            </button>
+            <button id="nextBtn" class="control-btn" title="Next">
+                ⏭
+            </button>
+            <button id="muteBtn" class="control-btn" title="Mute">
+                🔊
+            </button>
+        </div>
+        
+        <div class="volume-controls">
+            <span style="color:#bbdefb; font-size:14px;">Volume:</span>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.3">
+            <span id="volumePercent" class="volume-percent">30%</span>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element with YOUR DROPBOX LINK -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="https://dl.dropboxusercontent.com/scl/fi/ik7blzi1vo31d7jakfnp5/Indila-Love-Story.mp3?rlkey=jjur6hx5903e6u297vi9qg4im&st=9vb7gb4f" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <script src="script.js"></script>
+    <script>
+        // Audio Elements
+        const audio = document.getElementById('backgroundMusic');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercent = document.getElementById('volumePercent');
+        const musicStatus = document.getElementById('musicStatus');
+        const currentSong = document.getElementById('currentSong');
+        
+        // Set initial volume
+        audio.volume = 0.3;
+        
+        // Update UI
+        function updatePlayerUI(isPlaying) {
+            if (isPlaying) {
+                playBtn.innerHTML = '⏸';
+                playBtn.style.background = '#4CAF50';
+                musicStatus.innerHTML = '🎶 Music is playing...';
+                musicStatus.style.color = '#4CAF50';
+                currentSong.innerHTML = '▶ Indila - Love Story';
+            } else {
+                playBtn.innerHTML = '▶';
+                playBtn.style.background = '#ff4081';
+                musicStatus.innerHTML = '⏸ Music paused';
+                musicStatus.style.color = '#FF9800';
+                currentSong.innerHTML = '⏸ Indila - Love Story';
+            }
+        }
+        
+        // Try auto-play on user interaction
+        function attemptAutoPlay() {
+            audio.play().then(() => {
+                updatePlayerUI(true);
+            }).catch(error => {
+                console.log("Auto-play waiting for user interaction...");
+            });
+        }
+        
+        // Add click listeners for auto-play
+        document.addEventListener('click', attemptAutoPlay, { once: true });
+        document.addEventListener('keydown', attemptAutoPlay, { once: true });
+        
+        // Play Button
+        playBtn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                updatePlayerUI(true);
+            } else {
+                audio.pause();
+                updatePlayerUI(false);
+            }
+        });
+        
+        // Pause Button
+        pauseBtn.addEventListener('click', function() {
+            audio.pause();
+            updatePlayerUI(false);
+        });
+        
+        // Mute Button
+        muteBtn.addEventListener('click', function() {
+            audio.muted = !audio.muted;
+            this.innerHTML = audio.muted ? '🔈' : '🔊';
+            this.style.background = audio.muted ? '#ff5252' : '#3949ab';
+        });
+        
+        // Volume Control
+        volumeSlider.addEventListener('input', function() {
+            audio.volume = this.value;
+            const percent = Math.round(this.value * 100);
+            volumePercent.textContent = percent + '%';
+            
+            // Color coding for volume
+            if (percent >= 70) {
+                volumePercent.style.color = '#FF5252';
+            } else if (percent >= 40) {
+                volumePercent.style.color = '#FF9800';
+            } else {
+                volumePercent.style.color = '#64ffda';
+            }
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '✓ Added!';
+                this.style.background = '#4CAF50';
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.background = '';
+                }, 2000);
+            });
+        });
+        
+        // Next/Previous buttons (for future expansion)
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            alert('More songs coming soon! Currently playing: Indila - Love Story');
+        });
+        
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            audio.currentTime = 0;
+            alert('Restarted song from beginning');
+        });
+        
+        // Audio event listeners
+        audio.addEventListener('play', () => updatePlayerUI(true));
+        audio.addEventListener('pause', () => updatePlayerUI(false));
+        
+        // Initialize
+        updatePlayerUI(false);
+        
+        // Auto-play when page loads (if browser allows)
+        window.addEventListener('load', attemptAutoPlay);
+    </script>
 </body>
-</html>lass="logo">VICTONNEL STORE</h1>
-    <p class="tagline">Premium Products with Golden Touch ✨</p>
-    <div class="currency-badge">
-      <i class="fas fa-coins"></i> All prices in KES
-    </div>
-  </header>
-  
-  <!-- Products Section -->
-  <section class="products-section">
-    <h2 class="section-title">Featured Products</h2>
-    
-    <div class="products-grid">
-      <!-- Product 1 -->
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sport Shoes">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Sport Shoes</h3>
-          <div class="product-price">
-            <span class="currency">KES</span> 2,500
-          </div>
-          <button class="add-to-cart" data-name="Sport Shoes" data-price="2500">
-            <i class="fas fa-cart-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      
-      <!-- Product 2 -->
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Headphones">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Premium Headphones</h3>
-          <div class="product-price">
-            <span class="currency">KES</span> 1,500
-          </div>
-          <button class="add-to-cart" data-name="Premium Headphones" data-price="1500">
-            <i class="fas fa-cart-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-      
-      <!-- Product 3 -->
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="T-Shirt">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Designer T-Shirt</h3>
-          <div class="product-price">
-            <span class="currency">KES</span> 1,000
-          </div>
-          <button class="add-to-cart" data-name="Designer T-Shirt" data-price="1000">
-            <i class="fas fa-cart-plus"></i> Add to Cart
-          </button>
+</html>/button>
         </div>
       </div>
     </div>
@@ -457,4 +776,5 @@
   </script>
 </body>
             </html>
+
 
